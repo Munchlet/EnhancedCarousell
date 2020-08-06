@@ -1,11 +1,13 @@
-// If your extension doesn't need a background script, just leave this file empty
+/* global chrome */
+const MessageType = {
+	PAGE_RENDERED: "pageRendered",
+};
 
-messageInBackground();
-
-// This needs to be an export due to typescript implementation limitation of needing '--isolatedModules' tsconfig
-export function messageInBackground() {
-	console.log(
-		"I can run your javascript like any other code in your project"
-	);
-	console.log("just do not forget, I cannot render anything !");
-}
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+	if (changeInfo.url) {
+		chrome.tabs.sendMessage(tabId, {
+			type: MessageType.PAGE_RENDERED,
+			url: changeInfo.url,
+		});
+	}
+});

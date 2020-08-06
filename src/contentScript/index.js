@@ -1,22 +1,46 @@
-// If your extension doesn't need a content script, just leave this file empty
+/*global chrome*/
+const messageListenerUtil = require("../utils/messageListenerUtil");
+const domUtil = require("../utils/domUtil");
+const storageUtil = require("../utils/storageUtil");
+const CommonEnum = require("../enums/CommonEnum");
+const MessageType = require("../enums/MessageType");
 
-// This is an example of a script that will run on every page. This can alter pages
-// Don't forget to change `matches` in manifest.json if you want to only change specific webpages
-printAllPageLinks();
-
-// This needs to be an export due to typescript implementation limitation of needing '--isolatedModules' tsconfig
-export function printAllPageLinks() {
-	const allLinks = Array.from(
-		document.querySelectorAll("#IconSpotlight")
-	).map((link) => {
-		link.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.opacity =
-			"10%";
+(function () {
+	chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+		// listen for messages sent from background.js
+		if (request.type === MessageType.PAGE_RENDERED) {
+			console.log(`HELL YEAH!`);
+			console.log(request.url); // new url is now in content scripts!
+		}
 	});
 
-	console.log("-".repeat(30));
-	console.log(
-		`These are all ${allLinks.length} links on the current page that have been printed by the Sample Create React Extension`
-	);
-	console.log(allLinks);
-	console.log("-".repeat(30));
-}
+	window.enhancedGithub = {
+		config: {},
+	};
+
+	let readyStateCheckInterval = setInterval(function () {
+		if (document.readyState === "complete") {
+			clearInterval(readyStateCheckInterval);
+			document.addEventListener(
+				"click",
+				function (e) {
+					console.log(`CLICK CLICK`);
+				},
+				false
+			);
+			messageListenerUtil.addListners();
+			chrome.storage.sync.get(
+				{
+					"x-github-token": "",
+				},
+				function (storedData) {
+					if (storedData) {
+						storageUtil.set(CommonEnum.TOKEN, storedData["x-github-token"]);
+					}
+					console.log(`Adding data`, `>> ${storedData["x-github-token"]} <<`);
+					// domUtil.addRepoData();
+				}
+			);
+		}
+	}, 10);
+})();

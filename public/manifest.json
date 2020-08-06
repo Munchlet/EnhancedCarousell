@@ -9,14 +9,12 @@
 		"default_popup": "popup.html"
 	},
 	"background": {
-		"scripts": ["background.bundle.js"]
+		"scripts": ["background.bundle.js"],
+		"persistent": true
 	},
 	"content_scripts": [
 		{
-			"matches": [
-				"https://sg.carousell.com/search/*",
-				"https://sg.carousell.com/categories/*"
-			],
+			"matches": ["*://*.carousell.com/*"],
 			"js": ["contentScript.bundle.js"]
 		}
 	],
@@ -25,6 +23,5 @@
 		"48": "img/icon-48.png",
 		"128": "img/icon-128.png"
 	},
-	"permissions": ["activeTab"],
-	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+	"permissions": ["*://*.carousell.com/*", "storage", "webRequest", "webNavigation", "tabs"]
 }
