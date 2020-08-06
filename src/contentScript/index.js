@@ -6,9 +6,12 @@ printAllPageLinks();
 
 // This needs to be an export due to typescript implementation limitation of needing '--isolatedModules' tsconfig
 export function printAllPageLinks() {
-	const allLinks = Array.from(document.querySelectorAll("a")).map(
-		(link) => link.href
-	);
+	const allLinks = Array.from(
+		document.querySelectorAll("#IconSpotlight")
+	).map((link) => {
+		link.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.opacity =
+			"10%";
+	});
 
 	console.log("-".repeat(30));
 	console.log(
