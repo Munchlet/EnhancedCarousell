@@ -26,6 +26,16 @@ const self = (module.exports = {
 				return CommonEnum.CAROUSELL_URLTYPE.ERROR;
 		}
 	},
+	waitForSelector: (selector) => {
+		return new Promise((resolve) => {
+			const timer = setInterval(() => {
+				if (document.querySelector(selector) !== null) {
+					clearInterval(timer);
+					return resolve();
+				}
+			}, 100);
+		});
+	},
 	getContentPath: function () {
 		let str = window.location.href;
 		let result = str.match(/.*[bt][lr][oe][be]\/[^//]+\/(.*)/); // blob/tree :D
