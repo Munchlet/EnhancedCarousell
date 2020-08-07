@@ -9,19 +9,33 @@ const commonUtil = require("../utils/commonUtil");
 	chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 		console.log(request);
 		if (request && request.type === MessageType.PAGE_RENDERED) {
-			console.log(commonUtil.getUrlType(request.url));
+			const urlType = commonUtil.getUrlType(request.url);
+			console.log(urlType);
+			switch (urlType) {
+				case CommonEnum.CAROUSELL_URLTYPE.POST:
+					console.log(`here`);
+					const divs = document.getElementsByTagName("button");
+					for (let i = 0; i < divs.length; i += 1) {
+						console.log(divs[i].innerHTML);
+						if (divs[i].innerHTML.indexOf("read more") > -1) {
+							console.log(`GOOD AH!`);
+							divs[i].click();
+						}
+					}
+					break;
+				default:
+					console.log(`what type is this?!`);
+			}
+
 			Array.from(document.querySelectorAll("#IconSpotlight")).map((link) =>
 				link.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
 			);
 		}
 	});
 
-	window.enhancedGithub = {
-		config: {},
-	};
-
 	let readyStateCheckInterval = setInterval(function () {
 		if (document.readyState === "complete") {
+			console.log(`Page load completed`);
 			clearInterval(readyStateCheckInterval);
 			document.addEventListener(
 				"click",
