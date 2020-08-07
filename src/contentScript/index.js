@@ -1,16 +1,18 @@
 /*global chrome*/
-const messageListenerUtil = require("../utils/messageListenerUtil");
 const domUtil = require("../utils/domUtil");
 const storageUtil = require("../utils/storageUtil");
 const CommonEnum = require("../enums/CommonEnum");
 const MessageType = require("../enums/MessageType");
+const commonUtil = require("../utils/commonUtil");
 
 (function () {
 	chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-		// listen for messages sent from background.js
-		if (request.type === MessageType.PAGE_RENDERED) {
-			console.log(`HELL YEAH!`);
-			console.log(request.url); // new url is now in content scripts!
+		console.log(request);
+		if (request && request.type === MessageType.PAGE_RENDERED) {
+			console.log(commonUtil.getUrlType(request.url));
+			Array.from(document.querySelectorAll("#IconSpotlight")).map((link) =>
+				link.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+			);
 		}
 	});
 
@@ -28,7 +30,7 @@ const MessageType = require("../enums/MessageType");
 				},
 				false
 			);
-			messageListenerUtil.addListners();
+
 			chrome.storage.sync.get(
 				{
 					"x-github-token": "",
