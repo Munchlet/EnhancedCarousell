@@ -1,4 +1,31 @@
-let commonUtil = {
+const CommonEnum = require("../enums/CommonEnum");
+
+const self = (module.exports = {
+	getUrlType: function (str) {
+		const commonPattern = new RegExp(
+			`^https:\/\/[a-z]{2,2}\.carousell\.com\/(search|categories|p|sell|likes|inbox)\/?(.*?)$`,
+			"g"
+		);
+
+		const matches = commonPattern.exec(str);
+		if (matches === null) return CommonEnum.CAROUSELL_URLTYPE.PROFILE;
+		switch (matches[1]) {
+			case "search":
+				return CommonEnum.CAROUSELL_URLTYPE.SEARCH;
+			case "categories":
+				return CommonEnum.CAROUSELL_URLTYPE.CATEGORY;
+			case "p":
+				return CommonEnum.CAROUSELL_URLTYPE.POST;
+			case "sell":
+				return CommonEnum.CAROUSELL_URLTYPE.SELL;
+			case "likes":
+				return CommonEnum.CAROUSELL_URLTYPE.LIKES;
+			case "inbox":
+				return CommonEnum.CAROUSELL_URLTYPE.INBOX;
+			default:
+				return CommonEnum.CAROUSELL_URLTYPE.ERROR;
+		}
+	},
 	getContentPath: function () {
 		let str = window.location.href;
 		let result = str.match(/.*[bt][lr][oe][be]\/[^//]+\/(.*)/); // blob/tree :D
@@ -50,9 +77,9 @@ let commonUtil = {
 			}
 		});
 
-		folders = commonUtil.sortOn(folders, "name");
-		files = commonUtil.sortOn(files, "name");
-		others = commonUtil.sortOn(others, "name");
+		folders = self.sortOn(folders, "name");
+		files = self.sortOn(files, "name");
+		others = self.sortOn(others, "name");
 
 		dataAfterSorting = dataAfterSorting.concat(folders).concat(files).concat(others);
 		return dataAfterSorting;
@@ -77,10 +104,9 @@ let commonUtil = {
 		};
 	},
 	getFileSizeAndUnit: function (data) {
-		let formatBytes = commonUtil.convertSizeToHumanReadableFormat(data.size);
+		let formatBytes = self.convertSizeToHumanReadableFormat(data.size);
 		let size = formatBytes.size;
 		let unit = formatBytes.measure;
-
 		return size + " " + unit;
 	},
 	removePrevInstancesOf: function (selector) {
@@ -92,6 +118,4 @@ let commonUtil = {
 			el.parentNode.removeChild(el);
 		});
 	},
-};
-
-module.exports = commonUtil;
+});
