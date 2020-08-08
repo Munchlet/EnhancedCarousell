@@ -1,3 +1,5 @@
+/*global chrome*/
+
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
@@ -8,18 +10,18 @@ function App() {
 	});
 
 	useEffect(() => {
-		const localSettings = window.localStorage.getItem("settings");
-		try {
-			if (localSettings) setSettings(JSON.parse(localSettings));
-		} catch (error) {}
+		chrome.storage.sync.get(["settings"], (result) => setSettings(result.settings));
 	}, []);
 
 	const onCheckedChanged = (key, value) => {
 		setSettings((prev) => {
-			const newValue = { ...prev };
-			newValue[key] = value;
-			window.localStorage.setItem("settings", JSON.stringify(newValue));
-			return newValue;
+			const settings = { ...prev };
+			settings[key] = value;
+			chrome.storage.sync.set({
+				settings,
+			});
+
+			return settings;
 		});
 	};
 

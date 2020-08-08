@@ -50,13 +50,13 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 
 			chrome.storage.sync.get(
 				{
-					"x-github-token": "",
+					settings: {},
 				},
 				function (storedData) {
 					if (storedData) {
-						storageUtil.set(CommonEnum.TOKEN, storedData["x-github-token"]);
+						storageUtil.set(CommonEnum.TOKEN, storedData["settings"]);
 					}
-					console.log(`Adding data`, `>> ${storedData["x-github-token"]} <<`);
+					console.log(`Adding data`, `>> ${storedData["settings"]} <<`);
 					// domUtil.addRepoData();
 				}
 			);
