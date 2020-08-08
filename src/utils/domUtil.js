@@ -13,7 +13,7 @@ const self = (module.exports = {
 			case CommonEnum.CAROUSELL_URLTYPE.POST:
 				return CommonUtils.waitForSelector("#root > div > ul");
 			default:
-				return Promise.reject(false);
+				return Promise.resolve(false);
 		}
 	},
 	manipulatePage: async (url) => {

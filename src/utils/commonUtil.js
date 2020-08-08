@@ -31,7 +31,7 @@ const self = (module.exports = {
 			const timer = setInterval(() => {
 				if (document.querySelector(selector) !== null) {
 					clearInterval(timer);
-					return resolve();
+					return resolve(true);
 				}
 			}, 100);
 		});
