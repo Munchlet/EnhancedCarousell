@@ -34,7 +34,7 @@ function App() {
 					checked={settings["autoExpandReadMore"]}
 					onClick={(e) => onCheckedChanged("autoExpandReadMore", e.target.checked)}
 				/>
-				<label for="cb-settings-autoexpandreadmore">Auto click "read more" in Listing</label>
+				<label htmlFor="cb-settings-autoexpandreadmore">Auto click "read more" in Post</label>
 			</div>
 		</div>
 	);
