@@ -28,12 +28,16 @@ const self = (module.exports = {
 	},
 	waitForSelector: (selector) => {
 		return new Promise((resolve) => {
+			let counter = 0;
 			const timer = setInterval(() => {
+				if (counter >= 10) return resolve(false);
 				if (document.querySelector(selector) !== null) {
 					clearInterval(timer);
 					return resolve(true);
 				}
-			}, 100);
+
+				counter += 1;
+			}, 200);
 		});
 	},
 	getContentPath: function () {

@@ -22,7 +22,7 @@ const self = (module.exports = {
 		console.log(`[manipulatePage]: [${url}] | [${urlType}]`);
 		if (urlType === CommonEnum.CAROUSELL_URLTYPE.ERROR) return console.error(`Ignoring error page`);
 		const result = await self.waitForLoad(urlType);
-		if (!result) return console.error("Not any type?");
+		if (!result) return console.error("Not any type or may have timeout");
 		switch (urlType) {
 			case CommonEnum.CAROUSELL_URLTYPE.POST:
 				if (settings.autoExpandReadMore) CarousellUtils.autoExpandReadMore();
