@@ -26,12 +26,13 @@ function App() {
 	return (
 		<div className="App">
 			<div>
-				<span>Auto click "read more" in Listing</span>
 				<input
+					id="cb-settings-autoexpandreadmore"
 					type="checkbox"
 					checked={settings["autoExpandReadMore"]}
 					onClick={(e) => onCheckedChanged("autoExpandReadMore", e.target.checked)}
 				/>
+				<label for="cb-settings-autoexpandreadmore">Auto click "read more" in Listing</label>
 			</div>
 		</div>
 	);
