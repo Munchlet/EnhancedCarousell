@@ -4,7 +4,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			chrome.storage.sync.get({ settings: {} }, function (result) {
 				console.debug(`[stored] ${JSON.stringify(result)}`);
-				if (result) return resolve(result);
+				if (result) return resolve(result.settings);
 				return reject(new Error("Failed to retrieve settings"));
 			});
 		});
