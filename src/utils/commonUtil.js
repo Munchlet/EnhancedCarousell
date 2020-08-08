@@ -3,7 +3,7 @@ const CommonEnum = require("../enums/CommonEnum");
 const self = (module.exports = {
 	getUrlType: function (str) {
 		const commonPattern = new RegExp(
-			`^https:\/\/[a-z]{2,2}\.carousell\.com\/(search|categories|p|sell|likes|inbox)\/?(.*?)$`,
+			"^https://[a-z]{2,2}.carousell.com/(search|categories|p|sell|likes|inbox)/?(.*?)$",
 			"g"
 		);
 
