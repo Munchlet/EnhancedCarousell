@@ -47,19 +47,6 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 				},
 				false
 			);
-
-			chrome.storage.sync.get(
-				{
-					settings: {},
-				},
-				function (storedData) {
-					if (storedData) {
-						storageUtil.set(CommonEnum.TOKEN, storedData["settings"]);
-					}
-					console.log(`Adding data`, `>> ${storedData["settings"]} <<`);
-					// domUtil.addRepoData();
-				}
-			);
 		}
 	}, 10);
 })();
