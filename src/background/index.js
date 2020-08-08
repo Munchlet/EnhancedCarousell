@@ -1,7 +1,5 @@
 /* global chrome */
-const MessageType = {
-	PAGE_RENDERED: "pageRendered",
-};
+const MessageType = require("../enums/MessageType");
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 	if (changeInfo.url) {

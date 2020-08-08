@@ -1,9 +1,6 @@
 /*global chrome*/
 const domUtil = require("../utils/domUtil");
-const storageUtil = require("../utils/storageUtil");
-const CommonEnum = require("../enums/CommonEnum");
 const MessageType = require("../enums/MessageType");
-const commonUtil = require("../utils/commonUtil");
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 	if (request && request.type === MessageType.PAGE_RENDERED) {
