@@ -19,11 +19,11 @@ const self = (module.exports = {
 	manipulatePage: async (url) => {
 		const settings = await StorageUtils.getSettings();
 		const urlType = CommonUtils.getUrlType(url);
-		console.log(`[manipulatePage]: [${url}] | [${urlType}]`);
-		if (urlType === CommonEnum.CAROUSELL_URLTYPE.ERROR) return console.error(`Ignoring error page`);
-		const result = await self.waitForLoad(urlType);
+		console.log(`[manipulatePage]: [${url}] | [${JSON.stringify(urlType)}]`);
+		if (urlType.type === CommonEnum.CAROUSELL_URLTYPE.ERROR) return console.error(`Ignoring error page`);
+		const result = await self.waitForLoad(urlType.type);
 		if (!result) return console.error("Not any type or may have timeout");
-		switch (urlType) {
+		switch (urlType.type) {
 			case CommonEnum.CAROUSELL_URLTYPE.POST:
 				if (settings.autoExpandReadMore) CarousellUtils.autoExpandReadMore();
 				break;

@@ -8,22 +8,22 @@ const self = (module.exports = {
 		);
 
 		const matches = commonPattern.exec(str);
-		if (matches === null) return CommonEnum.CAROUSELL_URLTYPE.PROFILE;
+		if (matches === null) return { type: CommonEnum.CAROUSELL_URLTYPE.PROFILE };
 		switch (matches[1]) {
 			case "search":
-				return CommonEnum.CAROUSELL_URLTYPE.SEARCH;
+				return { type: CommonEnum.CAROUSELL_URLTYPE.SEARCH };
 			case "categories":
-				return CommonEnum.CAROUSELL_URLTYPE.CATEGORY;
+				return { type: CommonEnum.CAROUSELL_URLTYPE.CATEGORY };
 			case "p":
-				return CommonEnum.CAROUSELL_URLTYPE.POST;
+				return { type: CommonEnum.CAROUSELL_URLTYPE.POST };
 			case "sell":
-				return CommonEnum.CAROUSELL_URLTYPE.SELL;
+				return { type: CommonEnum.CAROUSELL_URLTYPE.SELL };
 			case "likes":
-				return CommonEnum.CAROUSELL_URLTYPE.LIKES;
+				return { type: CommonEnum.CAROUSELL_URLTYPE.LIKES };
 			case "inbox":
-				return CommonEnum.CAROUSELL_URLTYPE.INBOX;
+				return { type: CommonEnum.CAROUSELL_URLTYPE.INBOX };
 			default:
-				return CommonEnum.CAROUSELL_URLTYPE.ERROR;
+				return { type: CommonEnum.CAROUSELL_URLTYPE.ERROR };
 		}
 	},
 	waitForSelector: (selector) => {
