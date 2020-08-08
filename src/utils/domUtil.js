@@ -17,10 +17,9 @@ const self = (module.exports = {
 		}
 	},
 	manipulatePage: async (url) => {
-		console.log(`[manipulatePage] ${url}`);
 		const settings = await StorageUtils.getSettings();
 		const urlType = CommonUtils.getUrlType(url);
-		console.log(`[manipulatePage] ${urlType}`);
+		console.log(`[manipulatePage]: [${url}] | [${urlType}]`);
 		if (urlType === CommonEnum.CAROUSELL_URLTYPE.ERROR) return console.error(`Ignoring error page`);
 		const result = await self.waitForLoad(urlType);
 		if (!result) return console.error("Not any type?");
