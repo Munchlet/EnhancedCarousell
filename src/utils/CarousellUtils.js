@@ -7,4 +7,9 @@ module.exports = {
 			}
 		}
 	},
+	removeSpotlightListings: () => {
+		Array.from(document.querySelectorAll("#IconSpotlight")).map((link) =>
+			link.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+		);
+	},
 };

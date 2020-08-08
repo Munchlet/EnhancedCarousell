@@ -3,7 +3,7 @@ module.exports = {
 	CAROUSELL_URLTYPE: {
 		PROFILE: "profile",
 		CATEGORY: "category",
-		SEARCH: "search",
+		LISTINGS: "listings",
 		POST: "post",
 		SEARCHUSER: "searchuser",
 		SELL: "sell",

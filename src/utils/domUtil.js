@@ -27,12 +27,11 @@ const self = (module.exports = {
 			case CommonEnum.CAROUSELL_URLTYPE.POST:
 				if (settings.autoExpandReadMore) CarousellUtils.autoExpandReadMore();
 				break;
+			case CommonEnum.CAROUSELL_URLTYPE.LISTINGS:
+				if (settings.removeSpotlightListings) CarousellUtils.removeSpotlightListings();
+				break;
 			default:
 				console.log(`what type is this?!`);
 		}
-
-		Array.from(document.querySelectorAll("#IconSpotlight")).map((link) =>
-			link.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
-		);
 	},
 });
