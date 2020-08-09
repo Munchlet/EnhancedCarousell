@@ -6,16 +6,17 @@ import { DEFAULT_SETTINGS } from "./enums/CommonEnum";
 
 function App() {
 	const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+	const [storageArea] = useState(chrome.storage.sync || chrome.storage.local);
 
 	useEffect(() => {
-		chrome.storage.sync.get({ settings: DEFAULT_SETTINGS }, (result) => setSettings(result.settings));
+		storageArea.get({ settings: DEFAULT_SETTINGS }, (result) => setSettings(result.settings));
 	}, []);
 
 	const onCheckedChanged = (key, value) => {
 		setSettings((prev) => {
 			const settings = { ...prev };
 			settings[key] = value;
-			chrome.storage.sync.set({
+			storageArea.set({
 				settings,
 			});
 
