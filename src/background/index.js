@@ -2,6 +2,21 @@
 const MessageType = require("../enums/MessageType");
 
 const ALARMID = "ALARM_REFRESH_ID";
+const pollIntervalDefault = 3; // 3 seconds
+const pollIntervalMax = 3600; // 1 hour
+const requestTimeout = 1000 * 2; // 2 seconds
+
+var options = {
+	defaultUser: 0,
+	pollInterval: 20,
+	quietHours: [],
+	distractionFreeMinutes: 30,
+	useSnoozeColor: true,
+	useDesktopNotifications: true,
+	showPageMenu: true,
+	focusExistingInboxTab: false,
+	openInEmptyTab: false,
+};
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 	if (changeInfo.url) {
@@ -14,7 +29,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
 chrome.alarms.onAlarm.addListener(function (alarm) {
 	console.log("Got an alarm!", alarm);
-	notify(10);
+	fetchInboxCount();
 });
 
 function notify(count) {
@@ -23,10 +38,10 @@ function notify(count) {
 	chrome.notifications.create("inboxUpdate", {
 		type: "basic",
 		iconUrl: "img/icon-128.png",
-		title: "Inbox by Gmail Checker",
+		title: "Enhanced Carousell",
 		isClickable: true,
 		contextMessage: "Click to open Inbox",
-		message: `You have ${count} messages`,
+		message: `You have ${count} unread messages`,
 	});
 }
 
@@ -41,8 +56,38 @@ function updateIcon() {
 	chrome.browserAction.setBadgeText({ text: "?" });
 }
 
-function main() {
-	chrome.alarms.create(ALARMID, { delayInMinutes: 0.1, periodInMinutes: 0.1 });
+function createIntervalAlarm() {
+	console.log("scheduleRequest");
+	let pollInterval = options.pollInterval || pollIntervalDefault;
+	const multiplier = Math.pow(2, localStorage.requestFailureCount || 0);
+	if (pollInterval < 1) {
+		pollInterval *= multiplier;
+	} else {
+		const randomness = Math.random() * 2;
+		const fuzzyMultiplier = Math.max(randomness * multiplier, 1);
+		pollInterval = Math.round(fuzzyMultiplier * pollInterval);
+	}
+
+	const delay = Math.min(pollInterval, pollIntervalMax);
+	console.log("Scheduling for: " + delay + " seconds");
+	return chrome.alarms.create(ALARMID, { periodInMinutes: delay / 60.0 });
 }
 
-main();
+function main() {
+	chrome.alarms.get("refresh", function (alarm) {
+		if (!alarm) {
+			createIntervalAlarm();
+			fetchInboxCount();
+		}
+	});
+}
+
+function fetchInboxCount() {
+	console.log(`Fetching inbox count`);
+	// localStorage.requestFailureCount = 0;
+	fetch("https://carousell.com")
+		.then((response) => response.text())
+		.then((resp) => console.log(resp));
+}
+
+//main();
