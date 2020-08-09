@@ -12,6 +12,9 @@ const self = (module.exports = {
 		switch (type) {
 			case CommonEnum.CAROUSELL_URLTYPE.POST:
 				return CommonUtils.waitForSelector("#root > div > ul");
+			case CommonEnum.CAROUSELL_URLTYPE.LISTINGS:
+			case CommonEnum.CAROUSELL_URLTYPE.CATEGORY:
+				return CommonUtils.waitForSelectorText("p", "Item Condition");
 			default:
 				return Promise.resolve(false);
 		}
@@ -28,6 +31,7 @@ const self = (module.exports = {
 				if (settings.autoExpandReadMore) CarousellUtils.autoExpandReadMore();
 				break;
 			case CommonEnum.CAROUSELL_URLTYPE.LISTINGS:
+			case CommonEnum.CAROUSELL_URLTYPE.CATEGORY:
 				if (settings.autoRemoveSpotlight) CarousellUtils.removeSpotlightListings();
 				if (settings.autoRemoveBump) CarousellUtils.removeBumpedListings();
 				break;

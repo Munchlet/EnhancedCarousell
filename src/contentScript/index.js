@@ -20,7 +20,13 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 			document.addEventListener(
 				"click",
 				function (e) {
-					console.log(`CLICK CLICK`);
+					if (
+						e.target.getAttribute("type") === "button" &&
+						e.target.nodeName === "BUTTON" &&
+						e.target.textContent === "Load more"
+					) {
+						console.log(`CLICK LOAD MORE`);
+					}
 				},
 				false
 			);
