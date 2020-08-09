@@ -2,15 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { DEFAULT_SETTINGS } from "./enums/CommonEnum";
 
 function App() {
-	const [settings, setSettings] = useState({
-		autoExpandReadMore: false,
-		accounts: [],
-	});
+	const [settings, setSettings] = useState(DEFAULT_SETTINGS);
 
 	useEffect(() => {
-		chrome.storage.sync.get(["settings"], (result) => setSettings(result.settings));
+		chrome.storage.sync.get({ settings: DEFAULT_SETTINGS }, (result) => setSettings(result.settings));
 	}, []);
 
 	const onCheckedChanged = (key, value) => {

@@ -14,4 +14,8 @@ module.exports = {
 		SETTINGS: "settings",
 		IGNORE: "ignore",
 	},
+	DEFAULT_SETTINGS: {
+		autoExpandReadMore: false,
+		accounts: [],
+	},
 };
