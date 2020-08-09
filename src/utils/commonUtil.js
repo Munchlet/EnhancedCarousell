@@ -2,28 +2,25 @@ const CommonEnum = require("../enums/CommonEnum");
 
 const self = (module.exports = {
 	getUrlType: function (str) {
-		const commonPattern = new RegExp(
-			"^https://[a-z]{2,2}.carousell.com/(search|categories|p|sell|likes|inbox)/?(.*?)$",
-			"g"
-		);
-
+		const commonPattern = /^https:\/\/[a-z]{2,2}\.carousell\.com\/(search|categories|p|sell|likes|inbox|\w+)\/?(.*?)$/g;
 		const matches = commonPattern.exec(str);
-		if (matches === null) return { type: CommonEnum.CAROUSELL_URLTYPE.PROFILE };
+		console.log(matches);
+		if (matches === null) return { type: CommonEnum.CAROUSELL_URLTYPE.HOMEPAGE };
 		switch (matches[1]) {
 			case "search":
-				return { type: CommonEnum.CAROUSELL_URLTYPE.SEARCH };
+				return { type: CommonEnum.CAROUSELL_URLTYPE.LISTINGS };
 			case "categories":
 				return { type: CommonEnum.CAROUSELL_URLTYPE.CATEGORY };
 			case "p":
 				return { type: CommonEnum.CAROUSELL_URLTYPE.POST };
-			case "sell":
-				return { type: CommonEnum.CAROUSELL_URLTYPE.SELL };
-			case "likes":
-				return { type: CommonEnum.CAROUSELL_URLTYPE.LIKES };
 			case "inbox":
 				return { type: CommonEnum.CAROUSELL_URLTYPE.INBOX };
+			case "settings":
+			case "sell":
+			case "likes":
+				return { type: CommonEnum.CAROUSELL_URLTYPE.IGNORE };
 			default:
-				return { type: CommonEnum.CAROUSELL_URLTYPE.ERROR };
+				return { type: CommonEnum.CAROUSELL_URLTYPE.PROFILE, value: matches[1] };
 		}
 	},
 	waitForSelector: (selector) => {

@@ -1,6 +1,7 @@
 module.exports = {
 	TOKEN: "token",
 	CAROUSELL_URLTYPE: {
+		HOMEPAGE: "homepage",
 		PROFILE: "profile",
 		CATEGORY: "category",
 		LISTINGS: "listings",
@@ -10,5 +11,7 @@ module.exports = {
 		LIKES: "likes",
 		INBOX: "inbox",
 		ERROR: "error",
+		SETTINGS: "settings",
+		IGNORE: "ignore",
 	},
 };
