@@ -14,6 +14,12 @@ module.exports = {
 			link.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
 		);
 	},
+	removeBumpedListings: () => {
+		console.log("[CarousellUtils]: removeBumpedListings");
+		Array.from(document.querySelectorAll("#iconBumpOutlined")).map((link) =>
+			link.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+		);
+	},
 	getInboxCount: () => {
 		console.log("[CarousellUtils]: findInboxCount");
 		const inboxSelector = document.querySelector('a[href="/inbox/"]');

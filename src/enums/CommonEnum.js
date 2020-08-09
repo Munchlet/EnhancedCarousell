@@ -16,6 +16,8 @@ module.exports = {
 	},
 	DEFAULT_SETTINGS: {
 		autoExpandReadMore: false,
+		autoRemoveSpotlight: false,
+		autoRemoveBump: false
 		accounts: [],
 	},
 };

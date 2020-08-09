@@ -28,7 +28,8 @@ const self = (module.exports = {
 				if (settings.autoExpandReadMore) CarousellUtils.autoExpandReadMore();
 				break;
 			case CommonEnum.CAROUSELL_URLTYPE.LISTINGS:
-				if (settings.removeSpotlightListings) CarousellUtils.removeSpotlightListings();
+				if (settings.autoRemoveSpotlight) CarousellUtils.removeSpotlightListings();
+				if (settings.autoRemoveBump) CarousellUtils.removeBumpedListings();
 				break;
 			default:
 				console.log(`what type is this?!`);

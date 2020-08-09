@@ -33,7 +33,21 @@ function App() {
 					checked={settings["autoExpandReadMore"]}
 					onClick={(e) => onCheckedChanged("autoExpandReadMore", e.target.checked)}
 				/>
-				<label htmlFor="cb-settings-autoexpandreadmore">Auto click "read more" in Post</label>
+				<label htmlFor="cb-settings-autoexpandreadmore">Auto-click "read more" in Post</label>
+				<input
+					id="cb-settings-autoremovespotlight"
+					type="checkbox"
+					checked={settings["autoRemoveSpotlight"]}
+					onClick={(e) => onCheckedChanged("autoRemoveSpotlight", e.target.checked)}
+				/>
+				<label htmlFor="cb-settings-autoremovespotlight">Auto-remove "Spotlight" listings</label>
+				<input
+					id="cb-settings-autoremovebump"
+					type="checkbox"
+					checked={settings["autoRemoveBump"]}
+					onClick={(e) => onCheckedChanged("autoRemoveBump", e.target.checked)}
+				/>
+				<label htmlFor="cb-settings-autoremovebump">Auto-remove "Bump" listings</label>
 			</div>
 		</div>
 	);
