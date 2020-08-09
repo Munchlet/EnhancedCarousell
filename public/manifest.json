@@ -23,5 +23,13 @@
 		"48": "img/icon-48.png",
 		"128": "img/icon-128.png"
 	},
-	"permissions": ["*://*.carousell.com/*", "storage", "webRequest", "webNavigation", "tabs"]
+	"permissions": [
+		"*://*.carousell.com/*",
+		"storage",
+		"webRequest",
+		"webNavigation",
+		"tabs",
+		"alarms",
+		"notifications"
+	]
 }
