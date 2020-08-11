@@ -15,6 +15,8 @@ const self = (module.exports = {
 			case CommonEnum.CAROUSELL_URLTYPE.LISTINGS:
 			case CommonEnum.CAROUSELL_URLTYPE.CATEGORY:
 				return CommonUtils.waitForSelectorText("p", "Item Condition");
+			case CommonEnum.CAROUSELL_URLTYPE.PROFILE:
+				return CommonUtils.waitForSelector('a[href$="/followers/"]');
 			default:
 				return Promise.resolve(false);
 		}
@@ -34,6 +36,9 @@ const self = (module.exports = {
 			case CommonEnum.CAROUSELL_URLTYPE.CATEGORY:
 				if (settings.autoRemoveSpotlight) CarousellUtils.removeSpotlightListings();
 				if (settings.autoRemoveBump) CarousellUtils.removeBumpedListings();
+				break;
+			case CommonEnum.CAROUSELL_URLTYPE.PROFILE:
+				CarousellUtils.findProfileFollowerDiv();
 				break;
 			default:
 				console.log(`what type is this?!`);
