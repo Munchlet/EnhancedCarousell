@@ -1,6 +1,6 @@
 const CommonEnum = require("../enums/CommonEnum");
 
-const self = (module.exports = {
+module.exports = {
 	getUrlType: function (str) {
 		const commonPattern = /^https:\/\/[a-z]{2,2}\.carousell\.com\/(search|categories|p|sell|likes|inbox|\w+)\/?(.*?)$/g;
 		const matches = commonPattern.exec(str);
@@ -71,4 +71,20 @@ const self = (module.exports = {
 			el.parentNode.removeChild(el);
 		});
 	},
-});
+
+	createIconText: (icon, text) => {
+		const node = document.createElement("div");
+		node.setAttribute("class", "iconDiv");
+
+		const iconDiv = document.createElement("div");
+		iconDiv.setAttribute("class", "iconDiv__icon");
+		iconDiv.innerHTML = icon;
+
+		const textDiv = document.createElement("span");
+		textDiv.textContent = text;
+
+		node.appendChild(iconDiv);
+		node.appendChild(textDiv);
+		return node;
+	},
+};
