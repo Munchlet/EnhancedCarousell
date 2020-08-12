@@ -20,6 +20,6 @@
 	border: 4px solid orange !important;
 }
 
-.profile__picture--scammer {
+.profile__picture--untrusted {
 	border: 4px solid #f00 !important;
 }
