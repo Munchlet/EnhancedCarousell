@@ -38,8 +38,9 @@ const self = (module.exports = {
 				if (settings.autoRemoveBump) CarousellUtils.removeBumpedListings();
 				break;
 			case CommonEnum.CAROUSELL_URLTYPE.PROFILE:
-				CarousellUtils.findProfileFollowerDiv();
+				CarousellUtils.injectBlockProfile();
 				CarousellUtils.findProfilePictureDiv();
+				CarousellUtils.injectReputationShield();
 				break;
 			default:
 				console.log(`what type is this?!`);

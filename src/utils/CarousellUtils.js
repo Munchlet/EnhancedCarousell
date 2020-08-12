@@ -27,10 +27,10 @@ module.exports = {
 		const inboxSelector = document.querySelector('a[href="/inbox/"]');
 		return !!inboxSelector ? parseInt(inboxSelector.previousElementSibling.textContent, 10) : 0;
 	},
-	findProfileFollowerDiv: () => {
-		console.log("[CarousellUtils]: findProfileFollowerDiv");
+	injectBlockProfile: () => {
+		console.log("[CarousellUtils]: injectBlockProfile");
 		const followerDiv = document.querySelector('a[href$="/followers/"]').parentNode;
-		const node = commonUtil.createIconText("", "Block");
+		const node = commonUtil.createIconText("iconDiv__icon", "Block");
 		followerDiv.parentNode.insertBefore(node, followerDiv);
 		node.addEventListener("click", function (e) {
 			alert("Thanks!");
@@ -42,8 +42,27 @@ module.exports = {
 			'img[src^="https://media.karousell.com/media/photos/profiles/"]'
 		)[1].parentNode;
 		if (!!profilePicDiv) {
-			profilePicDiv.classList.add("profile__picture--caution");
+			profilePicDiv.classList.add("profile__picture--clean");
 			console.log(profilePicDiv);
 		}
+	},
+	injectReputationShield: () => {
+		console.log("[CarousellUtils]: injectReputationShield");
+		const nameNode = document.querySelectorAll('img[src^="https://media.karousell.com/media/photos/profiles/"]')[1]
+			.parentNode.parentNode.nextSibling;
+		console.log(nameNode);
+
+		const clonedNameNode = nameNode.cloneNode(true);
+
+		const node = document.createElement("div");
+		node.setAttribute("class", "iconDiv");
+
+		const iconDiv = document.createElement("div");
+		iconDiv.setAttribute("class", "iconDiv__icon iconDiv__icon--clean");
+
+		node.appendChild(iconDiv);
+		node.appendChild(clonedNameNode);
+		nameNode.parentNode.insertBefore(node, nameNode);
+		nameNode.parentNode.removeChild(nameNode);
 	},
 };

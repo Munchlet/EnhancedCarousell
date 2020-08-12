@@ -77,8 +77,7 @@ module.exports = {
 		node.setAttribute("class", "iconDiv");
 
 		const iconDiv = document.createElement("div");
-		iconDiv.setAttribute("class", "iconDiv__icon");
-		iconDiv.innerHTML = icon;
+		iconDiv.setAttribute("class", icon);
 
 		const textDiv = document.createElement("span");
 		textDiv.textContent = text;
