@@ -39,6 +39,7 @@ const self = (module.exports = {
 				break;
 			case CommonEnum.CAROUSELL_URLTYPE.PROFILE:
 				CarousellUtils.findProfileFollowerDiv();
+				CarousellUtils.findProfilePictureDiv();
 				break;
 			default:
 				console.log(`what type is this?!`);

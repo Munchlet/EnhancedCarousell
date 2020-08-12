@@ -11,3 +11,15 @@
 	margin-right: 8px;
 	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' d='M-1-1h18v18H-1z'/><g><path fill='%23d15241' stroke='null' d='M8 0a8 8 0 100 16A8 8 0 008 0zM2 8a6 6 0 019-5l-8 8-1-3zm6 6l-3-1 8-8a6 6 0 01-5 9z'/></g></svg>");
 }
+
+.profile__picture--clean {
+	border: 4px solid lime !important;
+}
+
+.profile__picture--caution {
+	border: 4px solid orange !important;
+}
+
+.profile__picture--scammer {
+	border: 4px solid #f00 !important;
+}
