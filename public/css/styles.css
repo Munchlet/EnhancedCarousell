@@ -11,6 +11,12 @@
 	margin-right: 8px;
 }
 
+.iconDiv__icon--delete {
+	margin-top: 12px;
+	cursor: pointer;
+	background-image: url("chrome-extension://__MSG_@@extension_id__/img/delete.svg");
+}
+
 .iconDiv__icon--block {
 	background-image: url("chrome-extension://__MSG_@@extension_id__/img/block.svg");
 }

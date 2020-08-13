@@ -41,6 +41,7 @@ const self = (module.exports = {
 				CarousellUtils.injectBlockProfile();
 				CarousellUtils.findProfilePictureDiv();
 				CarousellUtils.injectReputationShield();
+				CarousellUtils.injectDeleteListingProfile();
 				break;
 			default:
 				console.log(`what type is this?!`);

@@ -86,4 +86,21 @@ module.exports = {
 		node.appendChild(textDiv);
 		return node;
 	},
+	createHttp: (request, callback) => {
+		return new Promise((resolve, reject) => {
+			const xhttp = new XMLHttpRequest();
+			const method = request.method ? request.method.toUpperCase() : "GET";
+			xhttp.onload = () => {
+				return resolve(xhttp.responseText);
+			};
+			xhttp.onerror = () => {
+				return reject(-1);
+			};
+
+			xhttp.open(method, request.url, true);
+			if (method === "POST") xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			if (method === "DELETE") xhttp.setRequestHeader("content-type", "application/json");
+			return xhttp.send();
+		});
+	},
 };
