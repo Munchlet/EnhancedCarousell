@@ -94,10 +94,7 @@ function fetchInboxCount() {
 
 //main();
 
-const optionsSync = new OptionsSync();
-
-// Define defaults
-optionsSync.define({
+const optionsSync = new OptionsSync({
 	defaults: Object.assign({}, featuresDefaultValues, {
 		logging: false,
 	}),
