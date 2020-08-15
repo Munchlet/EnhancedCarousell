@@ -1,25 +1,41 @@
-/*global chrome*/
-
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { DEFAULT_SETTINGS } from "./enums/CommonEnum";
+import OptionsSync from "webext-options-sync";
+import { features } from "./features";
+
+const optionsStorage = new OptionsSync();
 
 function App() {
 	const [settings, setSettings] = useState(DEFAULT_SETTINGS);
-	const [storageArea] = useState(chrome.storage.sync || chrome.storage.local);
+	const [currentFeatures, setCurrentFeatures] = useState([]);
 
 	useEffect(() => {
-		storageArea.get({ settings: DEFAULT_SETTINGS }, (result) => setSettings(result.settings));
+		async function init() {
+			const options = await optionsStorage.getAll();
+			setSettings(options);
+			console.log(options);
+			const checkboxes = [];
+			console.log(features);
+			for (const [key, value] of Object.entries(features)) {
+				// Hide category if it has only hidden configurations
+				// if (!features.find((feature) => !feature.hidden)) {
+				// 	continue;
+				// }
+				checkboxes.push({ key, value });
+			}
+
+			setCurrentFeatures(checkboxes);
+		}
+
+		init();
 	}, []);
 
 	const onCheckedChanged = (key, value) => {
-		setSettings((prev) => {
+		setSettings(async (prev) => {
 			const settings = { ...prev };
 			settings[key] = value;
-			storageArea.set({
-				settings,
-			});
-
+			await optionsStorage.set({ [key]: value });
 			return settings;
 		});
 	};
@@ -27,27 +43,19 @@ function App() {
 	return (
 		<div className="App">
 			<div>
-				<input
-					id="cb-settings-autoexpandreadmore"
-					type="checkbox"
-					checked={settings["autoExpandReadMore"]}
-					onClick={(e) => onCheckedChanged("autoExpandReadMore", e.target.checked)}
-				/>
-				<label htmlFor="cb-settings-autoexpandreadmore">Auto-click "read more" in Post</label>
-				<input
-					id="cb-settings-autoremovespotlight"
-					type="checkbox"
-					checked={settings["autoRemoveSpotlight"]}
-					onClick={(e) => onCheckedChanged("autoRemoveSpotlight", e.target.checked)}
-				/>
-				<label htmlFor="cb-settings-autoremovespotlight">Auto-remove "Spotlight" listings</label>
-				<input
-					id="cb-settings-autoremovebump"
-					type="checkbox"
-					checked={settings["autoRemoveBump"]}
-					onClick={(e) => onCheckedChanged("autoRemoveBump", e.target.checked)}
-				/>
-				<label htmlFor="cb-settings-autoremovebump">Auto-remove "Bump" listings</label>
+				{currentFeatures.map(({ key, value }) => {
+					return (
+						<div key={key}>
+							<input
+								id={value.id}
+								type="checkbox"
+								checked={settings[key]}
+								onClick={(e) => onCheckedChanged(key, e.target.checked)}
+							/>
+							<label htmlFor={value.id}>{value.label}</label>
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);

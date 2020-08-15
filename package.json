@@ -3,12 +3,13 @@
 	"version": "0.0.1-alpha.1",
 	"private": true,
 	"dependencies": {
-		"@testing-library/jest-dom": "^4.2.4",
-		"@testing-library/react": "^9.3.2",
-		"@testing-library/user-event": "^7.1.2",
+		"@testing-library/jest-dom": "^5.11.3",
+		"@testing-library/react": "^10.4.8",
+		"@testing-library/user-event": "^12.1.1",
 		"react": "^16.13.1",
 		"react-browser-extension-scripts": "3.3.1",
-		"react-dom": "^16.13.1"
+		"react-dom": "^16.13.1",
+		"webext-options-sync": "^1.2.3"
 	},
 	"scripts": {
 		"start": "react-scripts start",

@@ -1,4 +1,6 @@
 /* global chrome */
+import OptionsSync from "webext-options-sync";
+import { featuresDefaultValues } from "../features";
 const MessageType = require("../enums/MessageType");
 
 const ALARMID = "ALARM_REFRESH_ID";
@@ -91,3 +93,20 @@ function fetchInboxCount() {
 }
 
 //main();
+
+const optionsSync = new OptionsSync();
+
+// Define defaults
+optionsSync.define({
+	defaults: Object.assign({}, featuresDefaultValues, {
+		logging: false,
+	}),
+	migrations: [OptionsSync.migrations.removeUnused],
+});
+
+// Make sure that all features have an option value
+optionsSync.getAll().then((options) => {
+	console.log(`ALL VALUES, ${options}`);
+	const newOptions = Object.assign({}, featuresDefaultValues, options);
+	optionsSync.setAll(newOptions);
+});

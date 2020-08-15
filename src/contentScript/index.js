@@ -1,12 +1,13 @@
 /*global chrome*/
-const domUtil = require("../utils/domUtil");
+const Utils = require("../utils");
 const MessageType = require("../enums/MessageType");
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 	if (request) {
 		switch (request.type) {
 			case MessageType.PAGE_RENDERED:
-				return domUtil.manipulatePage(request.url);
+				// return domUtil.manipulatePage(request.url);
+				return Utils.init(request.url);
 			default:
 				console.error(`Missing MessageType ${request}`);
 		}
@@ -36,7 +37,8 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 				false
 			);
 
-			return domUtil.manipulatePage(window.location.href);
+			// return domUtil.manipulatePage(window.location.href);
+			return Utils.init(window.location.href);
 		}
 	}, 10);
 })();
