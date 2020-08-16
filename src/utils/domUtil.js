@@ -1,4 +1,5 @@
 import OptionsSync from "webext-options-sync";
+import select from "select-dom";
 
 export const enableFeature = async ({ fn, id }) => {
 	const options = await new OptionsSync().getAll();
@@ -16,6 +17,15 @@ export const enableFeature = async ({ fn, id }) => {
 		console.log("❌", id);
 		console.error(error);
 	}
+};
+
+export const observeEl = (el, listener, options = { childList: true }) => {
+	if (typeof el === "string") el = select(el);
+	if (!el) return;
+	listener([]);
+	const observer = new MutationObserver(listener);
+	observer.observe(el, options);
+	return observer;
 };
 
 export const isProfilePage = () => {

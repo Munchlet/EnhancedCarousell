@@ -1,4 +1,5 @@
-import { enableFeature, isLoggedIn } from "./domUtil";
+import { enableFeature, isLoggedIn, observeEl } from "./domUtil";
+import select from "select-dom";
 import { features } from "../features";
 import * as CommonUtils from "./commonUtil";
 import * as CommonEnum from "../enums/CommonEnum";
@@ -15,6 +16,10 @@ export const init = async (url) => {
 	onDomReady(urlType.type);
 };
 
+function onNewListing(cb) {
+	observeEl(select("main").firstChild.firstChild, cb);
+}
+
 export const onDomReady = async (type) => {
 	console.log(`[onDomReady] ${type}`);
 	switch (type) {
@@ -23,8 +28,11 @@ export const onDomReady = async (type) => {
 			break;
 		case CommonEnum.CAROUSELL_URLTYPE.LISTINGS:
 		case CommonEnum.CAROUSELL_URLTYPE.CATEGORY:
-			await enableFeature(features.removeBumpedListings);
-			await enableFeature(features.removeSpotlightListings);
+			onNewListing(async () => {
+				await enableFeature(features.removeBumpedListings);
+				await enableFeature(features.removeSpotlightListings);
+			});
+
 			break;
 		case CommonEnum.CAROUSELL_URLTYPE.PROFILE:
 			await enableFeature(features.addProfileBlockButton);
@@ -33,7 +41,7 @@ export const onDomReady = async (type) => {
 			await enableFeature(features.addDeleteOwnListing);
 			break;
 		default:
-			console.log(`what type is this?!`);
+			console.log(`[onDomReady] Unable to identify type.`);
 	}
 };
 

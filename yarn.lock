@@ -9229,6 +9229,11 @@ schema-utils@^2.5.0, schema-utils@^2.6.0, schema-utils@^2.6.1:
     ajv "^6.12.0"
     ajv-keywords "^3.4.1"
 
+select-dom@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/select-dom/-/select-dom-6.0.2.tgz#3a7e0afbc55876e163e03bcb086368a71bb31ede"
+  integrity sha512-fnRexLCjOE1XtMiV0xGACx4GJFMs/eatOQM0LWL9lxWB8DJ/FeXO39ztqUh6dZCOdoFo/g6jGJIIqNWoMsNLPA==
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"

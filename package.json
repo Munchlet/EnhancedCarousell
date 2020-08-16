@@ -9,6 +9,7 @@
 		"react": "^16.13.1",
 		"react-browser-extension-scripts": "3.3.1",
 		"react-dom": "^16.13.1",
+		"select-dom": "^6.0.2",
 		"webext-options-sync": "^1.2.3"
 	},
 	"scripts": {
