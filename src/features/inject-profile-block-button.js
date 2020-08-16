@@ -1,4 +1,4 @@
-import * as CommonUtil from "../utils/commonUtil";
+import { createIconText } from "../utils/commonUtil";
 import OptionsSync from "webext-options-sync";
 
 const optionsStorage = new OptionsSync();
@@ -12,8 +12,8 @@ export default async function () {
 	let node = null;
 	const { profilesBlock = [] } = await optionsStorage.getAll();
 	const blocked = profilesBlock.includes(username);
-	if (blocked) node = CommonUtil.createIconText("iconDiv__icon iconDiv__icon--block", "Unblock");
-	else node = CommonUtil.createIconText("iconDiv__icon iconDiv__icon--block", "Block");
+	if (blocked) node = createIconText("iconDiv__icon iconDiv__icon--block", "Unblock");
+	else node = createIconText("iconDiv__icon iconDiv__icon--block", "Block");
 	followerDiv.parentNode.insertBefore(node, followerDiv);
 	node.addEventListener("click", async (e) => {
 		if (blocked) {

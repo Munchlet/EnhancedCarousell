@@ -1,4 +1,4 @@
-const commonUtil = require("../utils/commonUtil");
+import { createHttp } from "../utils/commonUtil";
 
 export default function () {
 	console.log("[CarousellUtils]: injectDeleteListingProfile");
@@ -17,7 +17,7 @@ export default function () {
 		node.setAttribute("class", "iconDiv__icon iconDiv__icon--delete");
 		node.addEventListener("click", async (e) => {
 			try {
-				const response = await commonUtil.createHttp({
+				const response = await createHttp({
 					method: "DELETE",
 					url: `https://sg.carousell.com/api-service/listing/2.0/product/${itemId}/`,
 				});
