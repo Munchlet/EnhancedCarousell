@@ -16,21 +16,21 @@ export const init = async (url) => {
 };
 
 export const onDomReady = async (type) => {
-	console.log(`DOM IS READY!!!`);
-	console.log(type);
+	console.log(`[onDomReady] ${type}`);
 	switch (type) {
 		case CommonEnum.CAROUSELL_URLTYPE.POST:
 			await enableFeature(features.autoExpandListing);
 			break;
 		case CommonEnum.CAROUSELL_URLTYPE.LISTINGS:
 		case CommonEnum.CAROUSELL_URLTYPE.CATEGORY:
-			// if (settings.autoRemoveSpotlight) CarousellUtils.removeSpotlightListings();
-			// if (settings.autoRemoveBump) CarousellUtils.removeBumpedListings();
+			await enableFeature(features.removeBumpedListings);
+			await enableFeature(features.removeSpotlightListings);
 			break;
 		case CommonEnum.CAROUSELL_URLTYPE.PROFILE:
 			await enableFeature(features.addProfileBlockButton);
 			await enableFeature(features.addProfilePictureStatus);
 			await enableFeature(features.addProfileReputationShield);
+			await enableFeature(features.addDeleteOwnListing);
 			break;
 		default:
 			console.log(`what type is this?!`);
