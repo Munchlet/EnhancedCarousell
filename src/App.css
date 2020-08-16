@@ -1,12 +1,16 @@
 .App {
 	background-color: #282c34;
 	min-height: 150px;
-	min-width: 250px;
-	padding: 30px;
+	min-width: 450px;
+	padding: 12px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
 	color: white;
+}
+
+.capitalize:first-letter {
+	text-transform: capitalize;
 }

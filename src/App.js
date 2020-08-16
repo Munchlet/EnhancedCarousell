@@ -16,13 +16,14 @@ function App() {
 			setSettings(options);
 			console.log(options);
 			const checkboxes = [];
-			console.log(features);
+			let category = "";
 			for (const [key, value] of Object.entries(features)) {
-				// Hide category if it has only hidden configurations
-				// if (!features.find((feature) => !feature.hidden)) {
-				// 	continue;
-				// }
-				checkboxes.push({ key, value });
+				if (category === "" || category !== value.category) {
+					category = value.category;
+					checkboxes.push({ type: 0, category });
+				}
+
+				checkboxes.push({ key, value, type: 1 });
 			}
 
 			setCurrentFeatures(checkboxes);
@@ -43,7 +44,14 @@ function App() {
 	return (
 		<div className="App">
 			<div>
-				{currentFeatures.map(({ key, value }) => {
+				{currentFeatures.map(({ key, value, type, category }) => {
+					if (type === 0)
+						return (
+							<h4 key={`div-${category}`} className="capitalize">
+								{category}
+							</h4>
+						);
+
 					return (
 						<div key={key}>
 							<input
