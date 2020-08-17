@@ -1,6 +1,6 @@
 /*global chrome*/
-const Utils = require("../utils");
-const MessageType = require("../enums/MessageType");
+import * as Utils from "../utils";
+import * as MessageType from "../enums/MessageType";
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 	if (request) {

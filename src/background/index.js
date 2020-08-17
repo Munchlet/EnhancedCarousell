@@ -1,7 +1,7 @@
 /* global chrome */
 import OptionsSync from "webext-options-sync";
 import { featuresDefaultValues } from "../features";
-const MessageType = require("../enums/MessageType");
+import * as MessageType from "../enums/MessageType";
 
 const ALARMID = "ALARM_REFRESH_ID";
 const pollIntervalDefault = 3; // 3 seconds
