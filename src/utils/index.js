@@ -24,22 +24,22 @@ export const onDomReady = async (type) => {
 	console.log(`[onDomReady] ${type}`);
 	switch (type) {
 		case CommonEnum.CAROUSELL_URLTYPE.POST:
-			await enableFeature(features.autoExpandListing);
+			enableFeature(features.autoExpandListing);
 			break;
 		case CommonEnum.CAROUSELL_URLTYPE.LISTINGS:
 		case CommonEnum.CAROUSELL_URLTYPE.CATEGORY:
 			onNewListing(async () => {
-				await enableFeature(features.removeBumpedListings);
-				await enableFeature(features.removeSpotlightListings);
-				await enableFeature(features.removeBlockedProfileListings);
+				enableFeature(features.removeBumpedListings);
+				enableFeature(features.removeSpotlightListings);
+				enableFeature(features.removeBlockedProfileListings);
 			});
 
 			break;
 		case CommonEnum.CAROUSELL_URLTYPE.PROFILE:
-			await enableFeature(features.addProfileBlockButton);
-			await enableFeature(features.addProfilePictureStatus);
-			await enableFeature(features.addProfileReputationShield);
-			await enableFeature(features.addDeleteOwnListing);
+			enableFeature(features.addProfileBlockButton);
+			enableFeature(features.addProfilePictureStatus);
+			enableFeature(features.addProfileReputationShield);
+			enableFeature(features.addDeleteOwnListing);
 			break;
 		default:
 			console.log(`[onDomReady] Unable to identify type.`);
