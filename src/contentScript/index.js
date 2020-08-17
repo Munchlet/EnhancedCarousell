@@ -15,10 +15,6 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 });
 
 (function () {
-	document.addEventListener("DOMNodeInserted", () => {
-		// console.log("DOM CHANGES");
-	});
-
 	let readyStateCheckInterval = setInterval(function () {
 		if (document.readyState === "complete") {
 			console.log(`Page load completed`);
