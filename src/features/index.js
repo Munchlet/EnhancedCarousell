@@ -14,6 +14,12 @@ export const features = {
 		fn: require("./remove-listings-spotlight").default,
 		hidden: true,
 	},
+	removeBlockedProfileListings: {
+		id: "removeBlockedProfileListings",
+		category: "general",
+		label: "Remove blocked profiles' listings",
+		fn: require("./remove-blocked-profile-listings").default,
+	},
 	/* PROFILE */
 	addDeleteOwnListing: {
 		id: "addDeleteOwnListing",

@@ -31,6 +31,7 @@ export const onDomReady = async (type) => {
 			onNewListing(async () => {
 				await enableFeature(features.removeBumpedListings);
 				await enableFeature(features.removeSpotlightListings);
+				await enableFeature(features.removeBlockedProfileListings);
 			});
 
 			break;
